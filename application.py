@@ -14,9 +14,6 @@ class Application:
         pyray.init_window(Settings.WIDTH, Settings.HEIGHT, "Pacman")
         pyray.set_target_fps(Settings.FPS)
 
-        self.objects2 = []
-        self.objects2.append(LogicPole())
-
         self.game_over = False
         self.scenes = [
             MenuScene(),
@@ -48,12 +45,6 @@ class Application:
         self.scene_event()
         self.scene_logic()
         self.scene_draw()
-
-        if Settings.scene_index == 2:
-            for obj in self.objects2:
-                obj.event()
-                obj.logic()
-                obj.draw()
 
     def run(self):
         while not self.game_over:

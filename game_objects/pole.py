@@ -24,12 +24,11 @@ class LogicPole(BaseObject):
     def logic(self):
         self.tick += 1
         if self.tick >= Settings.FPS:
-            # TODO: Все двигаются на одну клетку
-            # self.pacman.move(self.data)
+            # Все двигаются на одну клетку
             self.change_pole_data()
 
             self.tick = 0
-            # TODO: Вывод поля
+            # Вывод поля
             for row in self.data:
                 print(*row, end='')
             print(self.pacman.x, self.pacman.y)
