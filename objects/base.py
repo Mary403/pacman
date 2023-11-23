@@ -1,11 +1,11 @@
 class BaseObject:
     def __init__(self, x, y):
-        self._x = x
-        self._y = y
+        self.x = x
+        self.y = y
 
     def set_position(self, x, y):
-        self._x = x
-        self._y = y
+        self.x = x
+        self.y = y
 
     def activate(self):
         """

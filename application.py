@@ -2,17 +2,26 @@ import pyray
 
 from scenes.menu import MenuScene
 from scenes.pause import PauseScene
+from scenes.game import GameScene
 from settings import Settings
+
+from game_objects.pacman import PacmanLogic
+from game_objects.pole import LogicPole
 
 
 class Application:
     def __init__(self):
         pyray.init_window(Settings.WIDTH, Settings.HEIGHT, "Pacman")
         pyray.set_target_fps(Settings.FPS)
+
+        self.objects2 = []
+        self.objects2.append(LogicPole())
+
         self.game_over = False
         self.scenes = [
             MenuScene(),
             PauseScene(),
+            GameScene(),
         ]
 
     def scene_activate(self):
@@ -39,6 +48,12 @@ class Application:
         self.scene_event()
         self.scene_logic()
         self.scene_draw()
+
+        if Settings.scene_index == 2:
+            for obj in self.objects2:
+                obj.event()
+                obj.logic()
+                obj.draw()
 
     def run(self):
         while not self.game_over:

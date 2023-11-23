@@ -6,7 +6,7 @@ from scenes.base import BaseScene
 from settings import Settings
 
 
-class MenuScene(BaseScene):
+class MenuScene(BaseScene):  # Сцена 0
     def __init__(self):
         self.hello_text = Text(Settings.WIDTH // 2, Settings.HEIGHT // 2, "Welcome", 32)
         super().__init__()
@@ -17,3 +17,5 @@ class MenuScene(BaseScene):
     def additional_process_event(self):
         if pyray.is_key_pressed(pyray.KeyboardKey.KEY_P):
             Settings.set_scene(1)
+        if pyray.is_key_pressed(pyray.KeyboardKey.KEY_G):
+            Settings.set_scene(2)

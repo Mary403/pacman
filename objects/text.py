@@ -18,5 +18,5 @@ class Text(BaseObject):
         self.rect = pyray.Rectangle(x, y, 0, 0)
 
     def draw(self):
-        pos = pyray.Vector2(self._x, self._y)
+        pos = pyray.Vector2(self.x, self.y)
         pyray.draw_text_ex(pyray.get_font_default(), self.text, pos, self.size, self.spacing, self.color)
