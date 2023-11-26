@@ -1,5 +1,4 @@
 import pyray
-import raylib
 from raylib import colors
 
 from objects.text import Text
@@ -27,4 +26,3 @@ class GameScene(BaseScene):  # Сцена 2
             Settings.set_scene(1)
         if pyray.is_key_pressed(pyray.KeyboardKey.KEY_M):
             Settings.set_scene(0)
-

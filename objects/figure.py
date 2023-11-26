@@ -20,7 +20,7 @@ class Rect(BaseObject):
 
     def draw(self):
         draw_func = pyray.draw_rectangle if not self.__outline else pyray.draw_rectangle_lines
-        draw_func(self._x, self._y, self.__width, self.__height, self.__color)
+        draw_func(self.x, self.y, self.__width, self.__height, self.__color)
 
 
 class Circle(BaseObject):
@@ -47,7 +47,7 @@ class Circle(BaseObject):
 
     def draw(self):
         draw_func = pyray.draw_circle if not self.__outline else pyray.draw_circle_lines
-        draw_func(self._x, self._y, self.__radius, self.__color)
+        draw_func(self.x, self.y, self.__radius, self.__color)
 
 
 class Ellipse(BaseObject):
@@ -76,4 +76,4 @@ class Ellipse(BaseObject):
 
     def draw(self):
         draw_func = pyray.draw_ellipse if not self.__outline else pyray.draw_ellipse_lines
-        draw_func(self._x, self._y, self.__radius_w, self.__radius_h, self.__color)
+        draw_func(self.x, self.y, self.__radius_w, self.__radius_h, self.__color)

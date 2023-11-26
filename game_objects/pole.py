@@ -1,7 +1,9 @@
 from objects.base import BaseObject
 from settings import Settings
 from game_objects.pacman import PacmanLogic
-import levels
+
+import os
+
 
 """
 Класс Поля
@@ -16,7 +18,7 @@ class LogicPole(BaseObject):
         self.data = []  # поле
         self.tick = 0  # таймер
         self.pacman = PacmanLogic(0, 0)
-        self.read_level("./level1.txt")
+        self.read_level("levels/level1.txt")
 
     def event(self):
         self.pacman.event()
