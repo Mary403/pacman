@@ -1,6 +1,6 @@
 import pyray
 from raylib import colors
-from base import BaseObject
+from objects.base import BaseObject
 
 
 class Rect(BaseObject):
@@ -9,18 +9,18 @@ class Rect(BaseObject):
         Класс прямоугольника Raylib.
         """
         super().__init__(x, y)
-        self.__width = width
-        self.__height = height
+        self.width = width
+        self.height = height
         self.__color = color if color else colors.RED
         self.__outline = outline
 
     def set_size(self, w, h):
-        self.__width = w
-        self.__height = h
+        self.width = w
+        self.height = h
 
     def draw(self):
         draw_func = pyray.draw_rectangle if not self.__outline else pyray.draw_rectangle_lines
-        draw_func(self._x, self._y, self.__width, self.__height, self.__color)
+        draw_func(self.x, self.y, self.width, self.height, self.__color)
 
 
 class Circle(BaseObject):

@@ -15,6 +15,7 @@ class GameScene(BaseScene):  # Сцена 2
         self.hello_text = Text(Settings.WIDTH // 2, Settings.HEIGHT // 2, "Game", 32, colors.GREEN)
         self.pacman = PacmanLogic(0, 0)
         self.pole = LogicPole()
+
         super().__init__()
 
     def set_up_objects(self):
