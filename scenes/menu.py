@@ -19,3 +19,5 @@ class MenuScene(BaseScene):  # Сцена 0
             Settings.set_scene(1)
         if pyray.is_key_pressed(pyray.KeyboardKey.KEY_G):
             Settings.set_scene(2)
+        if pyray.is_key_pressed(pyray.KeyboardKey.KEY_S):
+            Settings.set_scene(3)
