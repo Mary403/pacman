@@ -7,7 +7,7 @@ class Settings:
     FPS = 60
     BACKGROUND_COLOR = colors.BLACK
     scene_changed = True
-    scene_index = 1
+    scene_index = 2
 
     @staticmethod
     def set_scene(index):
