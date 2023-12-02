@@ -4,6 +4,7 @@ from scenes.menu import MenuScene
 from scenes.pause import PauseScene
 from scenes.game import GameScene
 from scenes.settings import SettingsScene
+from scenes.cherry_test import CherryTest
 from settings import Settings
 
 from game_objects.pacman import PacmanLogic
@@ -21,6 +22,7 @@ class Application:
             PauseScene(),
             GameScene(),
             SettingsScene(),
+            CherryTest(),
         ]
 
     def scene_activate(self):

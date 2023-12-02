@@ -8,6 +8,7 @@ class Settings:
     BACKGROUND_COLOR = colors.BLACK
     scene_changed = True
     scene_index = 0
+    # scene_index = 4  # проверка вишенки
 
     @staticmethod
     def set_scene(index):
