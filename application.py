@@ -3,7 +3,7 @@ import pyray
 from scenes.menu import MenuScene
 from scenes.pause import PauseScene
 from settings import Settings
-from image.otrisovkapolya import otr_pole
+
 
 class Application:
     def __init__(self):
@@ -39,7 +39,6 @@ class Application:
         self.scene_event()
         self.scene_logic()
         self.scene_draw()
-        otr_pole()
 
     def run(self):
         while not self.game_over:
