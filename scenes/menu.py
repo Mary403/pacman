@@ -4,6 +4,7 @@ import raylib
 from objects.text import Text
 from scenes.base import BaseScene
 from settings import Settings
+from game_objects.seeds import Energizer
 
 
 class MenuScene(BaseScene):
