@@ -2,9 +2,13 @@ import raylib
 import pyray
 
 from settings import Settings
-from levels.levels import level1
+from game_objects.pole import LogicPole
+from game_objects.pacman import PacmanLogic
 
-def otr_pole(level=level1):
+def otr_pole(pole=LogicPole()):
+
+    level = pole.data
+
     x0 = Settings.WIDTH//2 - 5 * 32
     y0 = Settings.HEIGHT//2 - 5 * 32
     p = pyray.load_image('image/пустота.png')
@@ -17,7 +21,7 @@ def otr_pole(level=level1):
     ug3 = pyray.load_image('image/нлугол.png')
     ug4 = pyray.load_image('image/нпугол.png')
 
-    pacman = pyray.load_image('image/пакман.png')
+    pm = pyray.load_image('image/пакман.png')
 
     p_texture = pyray.load_texture_from_image(p)
     s1_texture = pyray.load_texture_from_image(s1)
@@ -28,18 +32,18 @@ def otr_pole(level=level1):
     ug2_texture = pyray.load_texture_from_image(ug2)
     ug3_texture = pyray.load_texture_from_image(ug3)
     ug4_texture = pyray.load_texture_from_image(ug4)
-    pacman_texture = pyray.load_texture_from_image(pacman)
+    pacman_texture = pyray.load_texture_from_image(pm)
 
-    for i in range(len(level)):
-        for j in range(len(level[i])):
-            if level[i][j] == "#":
+    for j in range(len(level)):
+        for i in range(len(level[j])):
+            if level[j][i] == "#":
                 if j == 0:
                     if i == 0:
                         pyray.draw_texture(ug1_texture, x0 + i * 32, y0 + j * 32, pyray.WHITE)
-                    elif i < len(level[i]) - 1:
-                        pyray.draw_texture(s1_texture, x0 + i * 32, y0 + j * 32, pyray.WHITE)
-                    else:
+                    elif i == len(level[i]) - 2:
                         pyray.draw_texture(ug2_texture, x0 + i * 32, y0 + j * 32, pyray.WHITE)
+                    else:
+                        pyray.draw_texture(s1_texture, x0 + i * 32, y0 + j * 32, pyray.WHITE)
                 elif j < len(level) - 1:
                     if i == 0:
                         pyray.draw_texture(s3_texture, x0 + i * 32, y0 + j * 32, pyray.WHITE)
@@ -48,11 +52,20 @@ def otr_pole(level=level1):
                 else:
                     if i == 0:
                         pyray.draw_texture(ug3_texture, x0 + i * 32, y0 + j * 32, pyray.WHITE)
-                    elif i < len(level[i]) - 1:
-                        pyray.draw_texture(s4_texture, x0 + i * 32, y0 + j * 32, pyray.WHITE)
-                    else:
+                    elif i == len(level[i]) - 2:
                         pyray.draw_texture(ug4_texture, x0 + i * 32, y0 + j * 32, pyray.WHITE)
-            elif level[i][j] == " ":
+                    else:
+                        pyray.draw_texture(s4_texture, x0 + i * 32, y0 + j * 32, pyray.WHITE)
+            elif level[j][i] == " ":
                 pyray.draw_texture(p_texture, x0 + i * 32, y0 + j * 32, pyray.WHITE)
-            elif level[i][j] == "@":
-                pyray.draw_texture(pacman_texture, x0 + i * 32, y0 + j * 32, pyray.WHITE)
+            elif level[j][i] == "@":
+                pacman = PacmanLogic(x0 + i * 32, y0 + j * 32)
+                pyray.draw_texture(pacman_texture, pacman._x, pacman._y, pyray.WHITE)
+                pacman.x = i
+                pacman.y = j
+
+    pole.change_pole_data()
+
+    #движение пакмана
+    pole.event()
+    pacman.move(pole.data)
