@@ -48,7 +48,6 @@ class Application:
         self.scene_logic()
         self.scene_draw()
 
-
     def run(self):
         while not self.game_over:
             self.process_frame()

@@ -15,9 +15,9 @@ class MenuScene(BaseScene):  # Сцена 0
         self.objects.append(self.hello_text)
 
     def additional_process_event(self):
-        if pyray.is_key_pressed(pyray.KeyboardKey.KEY_P):
+        if pyray.is_key_pressed(pyray.KeyboardKey.KEY_ONE):
             Settings.set_scene(1)
-        if pyray.is_key_pressed(pyray.KeyboardKey.KEY_G):
+        if pyray.is_key_pressed(pyray.KeyboardKey.KEY_TWO):
             Settings.set_scene(2)
-        if pyray.is_key_pressed(pyray.KeyboardKey.KEY_S):
+        if pyray.is_key_pressed(pyray.KeyboardKey.KEY_THREE):
             Settings.set_scene(3)
