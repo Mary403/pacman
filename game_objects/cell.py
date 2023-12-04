@@ -1,6 +1,8 @@
 from objects.figure import Rect
 from settings import Settings
 from raylib import colors
+from settings import Settings
+
 """
 Класс клетки для отрисовки поля
 
@@ -16,7 +18,7 @@ class Cell(Rect):
     def __init__(self, x, y, tip=1, width=30, height=30):
         self.tip = tip
         real_x, real_y = self.get_real_pos(x, y)
-        super().__init__(real_x, real_y, width, height, self.get_color(tip))
+        super().__init__(real_x, real_y, width, height, self.get_color(tip), Settings.field_outline)
 
     @staticmethod
     def get_real_pos(x, y):
@@ -33,4 +35,6 @@ class Cell(Rect):
             return colors.DARKBLUE
         if tip == 3:
             return colors.GREEN
+        if tip == 4:
+            return colors.YELLOW
 

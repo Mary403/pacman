@@ -10,6 +10,8 @@ class Settings:
     scene_index = 0
     # scene_index = 4  # проверка вишенки
 
+    field_outline = True
+
     @staticmethod
     def set_scene(index):
         Settings.scene_changed = True

@@ -19,18 +19,23 @@ class Turn:
 class PacmanLogic(BaseObject):
     def __init__(self, x, y):
         super().__init__(x, y)
-        self.turn = Turn.RIGHT
+        self.turn = Turn.UP
 
     def move(self, data):
         x, y = self.x, self.y
-        if self.turn == Turn.UP and data[y - 1][x] != '#':
+        if self.turn == Turn.UP and data[y - 1][x] != '#' and data[y - 1][x] != '=' and data[y - 1][x] != '!':
             self.y -= 1
-        if self.turn == Turn.RIGHT and data[y][x + 1] != '#':
+        if self.turn == Turn.RIGHT and data[y][x + 1] != '#' and data[y][x + 1] != '=' and data[y][x + 1] != '!':
             self.x += 1
-        if self.turn == Turn.DOWN and data[y + 1][x] != '#':
+        if self.turn == Turn.DOWN and data[y + 1][x] != '#' and data[y + 1][x] != '=' and data[y + 1][x] != '!':
             self.y += 1
-        if self.turn == Turn.LEFT and data[y][x - 1] != '#':
+        if self.turn == Turn.LEFT and data[y][x - 1] != '#' and data[y][x - 1] != '=' and data[y][x - 1] != '!':
             self.x -= 1
+
+        if self.turn == Turn.RIGHT and data[y][x + 1] == '!':
+            self.x = 1
+        if self.turn == Turn.LEFT and data[y][x - 1] == '!':
+            self.x = 15
 
     def event(self):
         keys = {

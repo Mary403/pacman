@@ -9,6 +9,7 @@ from settings import Settings
 from game_objects.pacman import PacmanLogic
 from game_objects.pole import LogicPole
 from game_objects.cell import Cell
+from game_objects.field import FieldDrawer
 
 from objects.button_menu import ButtonMenu
 from objects.figure import *
@@ -29,6 +30,8 @@ class GameScene(BaseScene):  # Сцена 2
         self.cell1 = Cell(1, 1)
         self.cell2 = Cell(5, 10)"""
 
+        self.field_drawer = FieldDrawer(self.pole.data)
+
         super().__init__()
 
     def set_up_objects(self):
@@ -37,6 +40,7 @@ class GameScene(BaseScene):  # Сцена 2
         self.objects.append(self.pole)
         self.objects.append(self.button_menu)
         self.objects.append(self.rec)
+        self.objects.append(self.field_drawer)
         """self.objects.append(self.cell0)
         self.objects.append(self.cell1)
         self.objects.append(self.cell2)
