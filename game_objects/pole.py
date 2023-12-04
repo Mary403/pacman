@@ -31,6 +31,7 @@ class LogicPole(BaseObject):
             # TODO: Вывод поля
             for row in self.data:
                 print(*row, end='')
+            print()
             print(self.pacman.x, self.pacman.y)
             print("-*-"*30)
 

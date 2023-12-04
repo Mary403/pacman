@@ -8,24 +8,39 @@ from settings import Settings
 
 from game_objects.pacman import PacmanLogic
 from game_objects.pole import LogicPole
+from game_objects.cell import Cell
+
 from objects.button_menu import ButtonMenu
+from objects.figure import *
 
 
 class GameScene(BaseScene):  # Сцена 2
     def __init__(self):
-        self.hello_text = Text(Settings.WIDTH // 2, Settings.HEIGHT // 2, "Game", 32, colors.GREEN)
+        # self.hello_text = Text(Settings.WIDTH // 2, Settings.HEIGHT // 2, "Game", 32, colors.GREEN)
         self.pacman = PacmanLogic(0, 0)
         self.pole = LogicPole()
         self.button_menu = ButtonMenu()
 
+        self.rec = Rect((Settings.WIDTH - 17 * 30) // 2, (Settings.HEIGHT - 21 * 30) // 2,
+                        Settings.WIDTH - (Settings.WIDTH - 17 * 30), Settings.HEIGHT - (Settings.HEIGHT - 21 * 30),
+                        colors.BLUE, True)
+
+        """self.cell0 = Cell(0, 0)
+        self.cell1 = Cell(1, 1)
+        self.cell2 = Cell(5, 10)"""
+
         super().__init__()
 
     def set_up_objects(self):
-        self.objects.append(self.hello_text)
+        # self.objects.append(self.hello_text)
         self.objects.append(self.pacman)
         self.objects.append(self.pole)
         self.objects.append(self.button_menu)
-
+        self.objects.append(self.rec)
+        """self.objects.append(self.cell0)
+        self.objects.append(self.cell1)
+        self.objects.append(self.cell2)
+"""
     def additional_process_event(self):
         if pyray.is_key_pressed(pyray.KeyboardKey.KEY_ZERO):
             Settings.set_scene(0)
