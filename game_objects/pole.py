@@ -37,7 +37,7 @@ class LogicPole(BaseObject):
     def change_pole_data(self):
         x, y = self.pacman.x, self.pacman.y
         # self.data[y][x] = ' '
-        self.data[y] = self.data[y][:x] + ' ' + self.data[y][x+1:]
+        self.data[y] = self.data[y][:x] + '.' + self.data[y][x+1:]
         self.pacman.move(self.data)
         x, y = self.pacman.x, self.pacman.y
         # self.data[y][x] = '@'
@@ -49,16 +49,17 @@ class LogicPole(BaseObject):
         for line in fin:
             self.data.append(line)
         for i in range(len(self.data)):
-            for j in range(len(self.data[0])):
+            for j in range(len(self.data[0])-1):
                 if self.data[i][j] == '@':
                     self.pacman.x, self.pacman.y = j, i
 
 
 def main():
     logic = LogicPole()
-    logic.read_level("../level1.txt")
+    logic.read_level("../levels/level1.txt")
     for line in logic.data:
         print(line, end='')
+    print(len(logic.data), len(logic.data[0]))
 
 
 if __name__ == '__main__':
