@@ -8,6 +8,7 @@ from settings import Settings
 
 from game_objects.pacman import PacmanLogic
 from game_objects.pole import LogicPole
+from objects.button_menu import ButtonMenu
 
 
 class GameScene(BaseScene):  # Сцена 2
@@ -15,6 +16,7 @@ class GameScene(BaseScene):  # Сцена 2
         self.hello_text = Text(Settings.WIDTH // 2, Settings.HEIGHT // 2, "Game", 32, colors.GREEN)
         self.pacman = PacmanLogic(0, 0)
         self.pole = LogicPole()
+        self.button_menu = ButtonMenu()
 
         super().__init__()
 
@@ -22,6 +24,7 @@ class GameScene(BaseScene):  # Сцена 2
         self.objects.append(self.hello_text)
         self.objects.append(self.pacman)
         self.objects.append(self.pole)
+        self.objects.append(self.button_menu)
 
     def additional_process_event(self):
         if pyray.is_key_pressed(pyray.KeyboardKey.KEY_ZERO):

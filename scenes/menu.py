@@ -20,7 +20,7 @@ class MenuScene(BaseScene):  # Сцена 0
         self.button1 = ButtonNewGame(Settings.WIDTH // 2 - 1000, Settings.HEIGHT // 2 - 50, 2000, 100,
                                      (20, 100, 20, 255), False, 'New game', (0, 255, 0, 255))
         self.button2 = ButtonSettings(Settings.WIDTH // 2 - 1000, Settings.HEIGHT // 2 - 50 + 150, 2000, 100,
-                                      (20, 20, 100, 255), False, 'Settings', (0, 0, 255, 255))
+                                      (20, 20, 100, 255), False, 'Settings', (100, 100, 255, 255))
         self.button3 = ButtonExit(Settings.WIDTH // 2 - 1000, Settings.HEIGHT // 2 - 50 + 150*2, 2000, 100,
                                   (100, 20, 20, 255), False, 'Exit', (255, 0, 0, 255))
         super().__init__()
