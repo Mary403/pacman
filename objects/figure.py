@@ -76,4 +76,4 @@ class Ellipse(BaseObject):
 
     def draw(self):
         draw_func = pyray.draw_ellipse if not self.__outline else pyray.draw_ellipse_lines
-        draw_func(self._x, self._y, self.__radius_w, self.__radius_h, self.__color)
+        draw_func(self.x, self.y, self.__radius_w, self.__radius_h, self.__color)

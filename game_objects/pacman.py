@@ -20,18 +20,24 @@ class Turn:
 
 class Pacman(Image):
     def __init__(self, x, y, size=30):
-        real_x, real_y = self.get_real_pos(x, y)
-        super().__init__("image/pacman1.png", pyray.Rectangle(real_x, real_y, size, size))
+        self.real_x, self.real_y = self.get_real_pos(x, y)
+        super().__init__("image/pacman1.png", pyray.Rectangle(self.real_x, self.real_y, size, size))
         self.turn = Turn.UP
+        self.radius = size // 2
 
-    @staticmethod
-    def get_real_pos(x, y):
-        real_x, real_y = ((Settings.WIDTH - 17 * 30) // 2) + 30 * x + 15, (
+    def get_real_pos(self, x, y):
+        self.real_x, self.real_y = ((Settings.WIDTH - 17 * 30) // 2) + 30 * x + 15, (
                 (Settings.HEIGHT - 21 * 30) // 2) + 30 * y + 15
-        return real_x, real_y
+        return self.real_x, self.real_y
 
     def set_pos(self, x, y):
         self.x, self.y = self.get_real_pos(x, y)
+
+    def get_center(self):
+        return self.real_x + 5, self.real_y + 5
+
+    def get_radius(self):
+        return self.radius
 
 
 """
