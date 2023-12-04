@@ -24,9 +24,9 @@ class GameScene(BaseScene):  # Сцена 2
         self.objects.append(self.pole)
 
     def additional_process_event(self):
-        if pyray.is_key_pressed(pyray.KeyboardKey.KEY_M):
+        if pyray.is_key_pressed(pyray.KeyboardKey.KEY_ZERO):
             Settings.set_scene(0)
-        if pyray.is_key_pressed(pyray.KeyboardKey.KEY_P):
+        if pyray.is_key_pressed(pyray.KeyboardKey.KEY_ONE):
             Settings.set_scene(1)
-        if pyray.is_key_pressed(pyray.KeyboardKey.KEY_S):
+        if pyray.is_key_pressed(pyray.KeyboardKey.KEY_THREE):
             Settings.set_scene(3)
