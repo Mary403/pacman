@@ -23,5 +23,5 @@ class FieldDrawer(BaseObject):
                     Cell(j, i, 2).draw()
                 elif self.data[i][j] == '!':
                     Cell(j, i, 3).draw()
-                elif self.data[i][j] == '@':
-                    Cell(j, i, 4).draw()
+                """elif self.data[i][j] == '@':
+                    Cell(j, i, 4).draw()"""

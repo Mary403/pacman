@@ -16,12 +16,13 @@ class LogicPole(BaseObject):
         self.tick = 0  # таймер
         self.pacman = PacmanLogic(0, 0)
         self.read_level("levels/level1.txt")
+        self.speed = 5
 
     def event(self):
         self.pacman.event()
 
     def logic(self):
-        self.tick += 1
+        self.tick += self.speed
         if self.tick >= Settings.FPS:
             # TODO: Все двигаются на одну клетку
             # self.pacman.move(self.data)

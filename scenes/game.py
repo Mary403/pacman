@@ -10,6 +10,7 @@ from game_objects.pacman import PacmanLogic
 from game_objects.pole import LogicPole
 from game_objects.cell import Cell
 from game_objects.field import FieldDrawer
+from game_objects.pacman import Pacman
 
 from objects.button_menu import ButtonMenu
 from objects.figure import *
@@ -18,8 +19,9 @@ from objects.figure import *
 class GameScene(BaseScene):  # Сцена 2
     def __init__(self):
         # self.hello_text = Text(Settings.WIDTH // 2, Settings.HEIGHT // 2, "Game", 32, colors.GREEN)
-        self.pacman = PacmanLogic(0, 0)
+        #self.pacman = PacmanLogic(8, 15)
         self.pole = LogicPole()
+        self.pac = self.pole.pacman.image_pacman
         self.button_menu = ButtonMenu()
 
         self.rec = Rect((Settings.WIDTH - 17 * 30) // 2, (Settings.HEIGHT - 21 * 30) // 2,
@@ -36,11 +38,12 @@ class GameScene(BaseScene):  # Сцена 2
 
     def set_up_objects(self):
         # self.objects.append(self.hello_text)
-        self.objects.append(self.pacman)
+        #self.objects.append(self.pacman)
         self.objects.append(self.pole)
         self.objects.append(self.button_menu)
         self.objects.append(self.rec)
         self.objects.append(self.field_drawer)
+        self.objects.append(self.pac)
         """self.objects.append(self.cell0)
         self.objects.append(self.cell1)
         self.objects.append(self.cell2)

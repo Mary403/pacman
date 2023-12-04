@@ -11,6 +11,7 @@ from objects.button import Button
 from objects.button_exit import ButtonExit
 from objects.button_newgame import ButtonNewGame
 from objects.button_settings import ButtonSettings
+from game_objects.pacman import Pacman
 
 
 class MenuScene(BaseScene):  # Сцена 0
@@ -23,6 +24,7 @@ class MenuScene(BaseScene):  # Сцена 0
                                       (20, 20, 100, 255), False, 'Settings', (100, 100, 255, 255))
         self.button3 = ButtonExit(Settings.WIDTH // 2 - 1000, Settings.HEIGHT // 2 - 50 + 150*2, 2000, 100,
                                   (100, 20, 20, 255), False, 'Exit', (255, 0, 0, 255))
+
         super().__init__()
 
     def set_up_objects(self):
