@@ -17,3 +17,13 @@ class Energizer(Ellipse):
         self.y = y
 
 
+class Seed(Ellipse):
+    def __init__(self, x, y, radius_w=10, radius_h=20, color=colors.YELLOW):
+        super().__init__(x, y, radius_w, radius_h, color)
+        self.weight = 10
+
+    def set_position(self, x, y):
+        self.x = x
+        self.y = y
+
+
