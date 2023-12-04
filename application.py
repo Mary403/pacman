@@ -52,3 +52,6 @@ class Application:
         while not self.game_over:
             self.process_frame()
         pyray.close_window()
+
+    def set_game_status(self, game_over):
+        self.game_over = game_over
