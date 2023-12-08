@@ -16,6 +16,8 @@ from game_objects.seeds import *
 from objects.button_menu import ButtonMenu
 from objects.figure import *
 
+from objects.counter import Counter
+
 
 class GameScene(BaseScene):  # Сцена 2
     def __init__(self):
@@ -37,6 +39,8 @@ class GameScene(BaseScene):  # Сцена 2
                         Settings.WIDTH - (Settings.WIDTH - 17 * 30), Settings.HEIGHT - (Settings.HEIGHT - 21 * 30),
                         (0, 0, 0, 160), False)
 
+        self.counter = Counter(300, 30)
+
         super().__init__()
 
     def set_up_objects(self):
@@ -52,6 +56,7 @@ class GameScene(BaseScene):  # Сцена 2
         self.objects.append(self.cell2)"""
         #self.objects.append(self.rec_gameover)
         #self.objects.append(self.gameover_text)
+        self.objects.append(self.counter)
 
     def additional_process_event(self):
         if pyray.is_key_pressed(pyray.KeyboardKey.KEY_ZERO):
@@ -69,8 +74,9 @@ class GameScene(BaseScene):  # Сцена 2
 
             # print(c1, r1, c2, r2)
             if pyray.check_collision_circles(c1, r1, c2, r2):
-                self.seeds.seeds.remove(self.seeds.seeds[i])
                 # TODO: seed eaten
+                self.seeds.seeds[i].eaten(self.counter)
+                self.seeds.seeds.remove(self.seeds.seeds[i])
                 break
         # TODO: Если зёрен не осталось, победа
         if len(self.seeds.seeds) <= 0:

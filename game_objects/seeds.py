@@ -32,9 +32,9 @@ class Energizer(Ellipse):
         real_x, real_y = ((Settings.WIDTH - 17 * 30) // 2) + 30 * x + 15, ((Settings.HEIGHT - 21 * 30) // 2) + 30 * y + 15
         return real_x, real_y
 
-    def eaten(self):
+    def eaten(self, counter):
         # TODO: К счёту прибавляеться вес зерна, Включается режим bust
-        pass
+        counter.score_change(self.weight)
 
 
 class Seed(Ellipse):
@@ -60,9 +60,9 @@ class Seed(Ellipse):
         real_x, real_y = ((Settings.WIDTH - 17 * 30) // 2) + 30 * x + 15, ((Settings.HEIGHT - 21 * 30) // 2) + 30 * y + 15
         return real_x, real_y
 
-    def eaten(self):
+    def eaten(self, counter):
         # TODO: К счёту прибавляеться вес зерна
-        pass
+        counter.score_change(self.weight)
 
 
 class SeedsLogic(BaseObject):
