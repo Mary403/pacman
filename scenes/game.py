@@ -31,20 +31,28 @@ class GameScene(BaseScene):  # Сцена 2
         self.field_drawer = FieldDrawer(self.pole.data)
         self.seeds = SeedsLogic()
 
+        self.gameover_text = Text(Settings.WIDTH // 2 - 270, Settings.HEIGHT // 2 - 50, "GAME OVER", 100,
+                               colors.RED)
+        self.rec_gameover = Rect((Settings.WIDTH - 17 * 30) // 2, (Settings.HEIGHT - 21 * 30) // 2,
+                        Settings.WIDTH - (Settings.WIDTH - 17 * 30), Settings.HEIGHT - (Settings.HEIGHT - 21 * 30),
+                        (0, 0, 0, 160), False)
+
         super().__init__()
 
     def set_up_objects(self):
         # self.objects.append(self.hello_text)
         self.objects.append(self.pole)
         self.objects.append(self.button_menu)
-        self.objects.append(self.rec)
+        # self.objects.append(self.rec)
         self.objects.append(self.field_drawer)
         self.objects.append(self.pac)
         self.objects.append(self.seeds)
         """self.objects.append(self.cell0)
         self.objects.append(self.cell1)
-        self.objects.append(self.cell2)
-"""
+        self.objects.append(self.cell2)"""
+        #self.objects.append(self.rec_gameover)
+        #self.objects.append(self.gameover_text)
+
     def additional_process_event(self):
         if pyray.is_key_pressed(pyray.KeyboardKey.KEY_ZERO):
             Settings.set_scene(0)
@@ -65,3 +73,8 @@ class GameScene(BaseScene):  # Сцена 2
                 # TODO: seed eaten
                 break
         # TODO: Если зёрен не осталось, победа
+        if len(self.seeds.seeds) <= 0:
+            self.objects.append(self.rec_gameover)
+            self.objects.append(self.gameover_text)
+            Settings.is_gameover = True
+

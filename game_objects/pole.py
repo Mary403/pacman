@@ -26,7 +26,8 @@ class LogicPole(BaseObject):
         if self.tick >= Settings.FPS:
             # TODO: Все двигаются на одну клетку
             # self.pacman.move(self.data)
-            self.change_pole_data()
+            if not Settings.is_gameover:
+                self.change_pole_data()
 
             self.tick = 0
             # TODO: Вывод поля

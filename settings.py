@@ -10,7 +10,8 @@ class Settings:
     scene_index = 0
     # scene_index = 4  # проверка вишенки
 
-    field_outline = True
+    is_gameover = False
+    field_outline = False
 
     @staticmethod
     def set_scene(index):
