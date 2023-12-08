@@ -22,6 +22,10 @@ class Rect(BaseObject):
         draw_func = pyray.draw_rectangle if not self.__outline else pyray.draw_rectangle_lines
         draw_func(self.x, self.y, self.width, self.height, self.__color)
 
+    def set_color(self, color):
+        self.__color = color
+
+
 
 class Circle(BaseObject):
     def __init__(self, x, y, radius, color=None, outline=False):

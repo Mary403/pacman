@@ -12,8 +12,9 @@ from objects.text import Text
 class Button(Rect):
     def __init__(self, x, y, width, height, color=None, outline=False, text=None, color_text=None):
         super().__init__(x, y, width, height, color, outline)
-        self.colorText = color_text
-        self.text = Text(x + width // 2 - 18 * len(text) // 2, y + height // 2 - 18, text, 32, color_text)  # ООО ДАААА ТЕКСТ ПО СЕРЕДИНЕ
+        self.color_text = color_text
+        self.text = Text(x + width // 2 - 18 * len(text) // 2, y + height // 2 - 18, text, 32,
+                         color_text)  # ООО ДАААА ТЕКСТ ПО СЕРЕДИНЕ
 
     def set_size(self, w, h):
         self.width = w
@@ -38,3 +39,7 @@ class Button(Rect):
 
     def click(self):  # событие клика
         print('Кликнулось')
+
+    def set_text(self, text):
+        self.text = Text(self.x + self.width // 2 - 18 * len(text) // 2, self.y + self.height // 2 - 18, text, 32,
+                         self.color_text)
