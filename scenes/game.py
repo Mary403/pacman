@@ -14,6 +14,8 @@ from game_objects.pacman import Pacman
 from game_objects.seeds import *
 
 from objects.button_menu import ButtonMenu
+from objects.button_pause import ButtonPause
+
 from objects.figure import *
 
 from objects.counter import Counter
@@ -25,6 +27,7 @@ class GameScene(BaseScene):  # Сцена 2
         self.pole = LogicPole()
         self.pac = self.pole.pacman.image_pacman
         self.button_menu = ButtonMenu()
+        self.button_pause = ButtonPause()
 
         self.rec = Rect((Settings.WIDTH - 17 * 30) // 2, (Settings.HEIGHT - 21 * 30) // 2,
                         Settings.WIDTH - (Settings.WIDTH - 17 * 30), Settings.HEIGHT - (Settings.HEIGHT - 21 * 30),
@@ -47,6 +50,7 @@ class GameScene(BaseScene):  # Сцена 2
         # self.objects.append(self.hello_text)
         self.objects.append(self.pole)
         self.objects.append(self.button_menu)
+        self.objects.append(self.button_pause)
         # self.objects.append(self.rec)
         self.objects.append(self.field_drawer)
         self.objects.append(self.pac)
