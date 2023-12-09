@@ -1,12 +1,11 @@
-"""
-    Добавить в приложение класс большого зерна (Energizer)
-    Объект этого класса должен уметь отображаться в виде картинки (пока что жёлтый круг радиусом в 20 пикселей).
-    Объект этого класса должен хранить в себе вес малого зерна (по умолчанию 50).
-"""
 from objects.figure import Ellipse
 from raylib import colors
 from objects.base import BaseObject
 from settings import Settings
+
+"""
+    Классы большого и маленького зерна
+"""
 
 
 class Energizer(Ellipse):
@@ -33,7 +32,7 @@ class Energizer(Ellipse):
         return real_x, real_y
 
     def eaten(self, counter):
-        # TODO: К счёту прибавляеться вес зерна, Включается режим bust
+        # TODO: Включается режим bust
         counter.score_change(self.weight)
 
 
@@ -61,7 +60,6 @@ class Seed(Ellipse):
         return real_x, real_y
 
     def eaten(self, counter):
-        # TODO: К счёту прибавляеться вес зерна
         counter.score_change(self.weight)
 
 

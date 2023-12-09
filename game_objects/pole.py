@@ -25,7 +25,6 @@ class LogicPole(BaseObject):
         self.tick += self.speed
         if self.tick >= Settings.FPS:
             # TODO: Все двигаются на одну клетку
-            # self.pacman.move(self.data)
             if not Settings.is_gameover:
                 self.change_pole_data()
 
@@ -57,7 +56,7 @@ class LogicPole(BaseObject):
                     self.pacman.x, self.pacman.y = j, i
 
 
-def main():
+"""def main():
     logic = LogicPole()
     logic.read_level("../levels/level1.txt")
     for line in logic.data:
@@ -67,3 +66,4 @@ def main():
 
 if __name__ == '__main__':
     main()
+"""

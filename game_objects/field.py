@@ -1,10 +1,8 @@
+from game_objects.cell import Cell
+from objects.base import BaseObject
 """
 Класс отрисовки поля
 """
-from game_objects.pole import LogicPole
-from game_objects.cell import Cell
-
-from objects.base import BaseObject
 
 
 class FieldDrawer(BaseObject):
@@ -24,4 +22,4 @@ class FieldDrawer(BaseObject):
                 elif self.data[i][j] == '!':
                     Cell(j, i, 3).draw()
                 """elif self.data[i][j] == '@':
-                    Cell(j, i, 4).draw()"""
+                    Cell(j, i, 4).draw()"""  # Можно вывести пакмена как квадратик

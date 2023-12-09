@@ -1,10 +1,11 @@
 import pyray
 from raylib import colors
 
-from objects.text import Text
 from scenes.base import BaseScene
-from objects.button_pause import ButtonPause
 from settings import Settings
+
+from objects.text import Text
+from objects.button_pause import ButtonPause
 
 
 class PauseScene(BaseScene):  # Сцена 1

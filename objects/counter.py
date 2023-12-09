@@ -1,6 +1,10 @@
 from objects.text import Text
 from raylib import colors
 
+"""
+    Класс счётчика
+"""
+
 
 class Counter(Text):
     def __init__(self, x, y, text='Score: 0', size=30, color=colors.WHITE, spacing=2, score=0):

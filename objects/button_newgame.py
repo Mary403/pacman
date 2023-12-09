@@ -1,5 +1,3 @@
-import sys
-
 from objects.button import Button
 from settings import Settings
 

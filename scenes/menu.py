@@ -1,17 +1,13 @@
 import pyray
-import raylib
+from raylib import colors
 
-from objects.text import Text
 from scenes.base import BaseScene
 from settings import Settings
 
-from raylib import colors
-
-from objects.button import Button
+from objects.text import Text
 from objects.button_exit import ButtonExit
 from objects.button_newgame import ButtonNewGame
 from objects.button_settings import ButtonSettings
-from game_objects.pacman import Pacman
 
 
 class MenuScene(BaseScene):  # Сцена 0

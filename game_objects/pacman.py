@@ -2,7 +2,6 @@ import pyray
 
 from objects.base import BaseObject
 from objects.image import Image
-from raylib import colors
 from settings import Settings
 
 
@@ -44,7 +43,7 @@ class Pacman(Image):
             self.tick = 0
 
             self.index_pic += 1
-            if self.index_pic > 2:
+            if self.index_pic > len(self.pictures) - 1:
                 self.index_pic = 0
 
             self.set_picture(self.pictures[self.index_pic])
