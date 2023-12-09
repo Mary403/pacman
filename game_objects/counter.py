@@ -2,7 +2,7 @@ from objects.text import Text
 from raylib import colors
 
 """
-    Класс счётчика
+Класс счётчика
 """
 
 
@@ -13,4 +13,8 @@ class Counter(Text):
 
     def score_change(self, points):
         self.score += points
+        self.text = 'Score: ' + str(self.score)
+
+    def newgame(self):
+        self.score = 0
         self.text = 'Score: ' + str(self.score)

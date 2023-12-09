@@ -18,6 +18,9 @@ class LogicPole(BaseObject):
         self.read_level("levels/level1.txt")
         self.speed = 5
 
+    def newgame(self):
+        self.read_level("levels/level1.txt")
+
     def event(self):
         self.pacman.event()
 
@@ -30,11 +33,11 @@ class LogicPole(BaseObject):
 
             self.tick = 0
             # TODO: Вывод поля
-            """for row in self.data:
+            for row in self.data:
                 print(*row, end='')
             print()
             print(self.pacman.x, self.pacman.y)
-            print("-*-"*30)"""
+            print("-*-"*30)
 
     def change_pole_data(self):
         x, y = self.pacman.x, self.pacman.y

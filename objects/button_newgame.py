@@ -12,4 +12,5 @@ class ButtonNewGame(Button):
 
     def click(self):  # событие клика
         super().click()
+        Settings.newgame = True
         Settings.set_scene(2)

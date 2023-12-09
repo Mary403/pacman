@@ -70,6 +70,11 @@ class SeedsLogic(BaseObject):
         self.seeds = []
         self.read_level("levels/level1.txt")
 
+    def newgame(self):
+        self.data = []
+        self.seeds = []
+        self.read_level("levels/level1.txt")
+
     def set_data(self):
         for i in range(len(self.data)):
             for j in range(len(self.data[0]) - 1):
@@ -77,7 +82,7 @@ class SeedsLogic(BaseObject):
                     if (i == 3 and j == 1) or (i == 15 and j == 15) or (i == 15 and j == 1) or (i == 3 and j == 15):
                         seed = Energizer(j, i)
                         self.seeds.append(seed)
-                    elif not (i == 11 and j > 13) and not (i == 7 and j > 13):
+                    elif not (i == 11 and j > 13) and not (i == 7 and j > 13) and not (i == 8 and j == 15):
                         seed = Seed(j, i)
                         self.seeds.append(seed)
 

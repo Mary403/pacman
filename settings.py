@@ -13,6 +13,8 @@ class Settings:
     is_gameover = False
     field_outline = False
 
+    newgame = False
+
     @staticmethod
     def set_scene(index):
         Settings.scene_changed = True

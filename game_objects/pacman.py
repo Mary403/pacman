@@ -33,6 +33,13 @@ class Pacman(Image):
         ]
         self.index_pic = 0
 
+        self.start_x = x
+        self.start_y = y
+
+    def newgame(self):
+        self.turn = Turn.UP
+        self.set_pos(self.start_x, self.start_y)
+
     def logic(self):
         super().logic()
         self.animation()
@@ -73,6 +80,8 @@ class PacmanLogic(BaseObject):
         super().__init__(x, y)
         self.turn = Turn.UP
         self.image_pacman = Pacman(8, 15)
+        self.start_x = x
+        self.start_y = y
 
     def move(self, data):
         x, y = self.x, self.y
@@ -95,6 +104,11 @@ class PacmanLogic(BaseObject):
             self.x = 15
 
         self.image_pacman.set_pos(self.x, self.y)
+
+    def newgame(self):
+        self.turn = Turn.UP
+        """self.x = self.start_x
+        self.y = self.start_y"""
 
     def logic(self):
         self.image_pacman.logic()
