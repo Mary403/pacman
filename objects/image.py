@@ -18,3 +18,11 @@ class Image(BaseObject):
         dest = pyray.Rectangle(self.x, self.y, self.width, self.height)
         origin = pyray.Vector2(self.width // 2, self.height // 2)
         pyray.draw_texture_pro(self.texture, source, dest, origin, self.rotation, pyray.Color(*[255] * 4))
+
+    def set_picture(self, path):
+        pic = pyray.load_image(path)
+        self.texture = pyray.load_texture_from_image(pic)
+        pyray.unload_image(pic)
+
+    def set_rotation(self, rot):
+        self.rotation = rot

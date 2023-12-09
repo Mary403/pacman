@@ -47,7 +47,6 @@ class GameScene(BaseScene):  # Сцена 2
         super().__init__()
 
     def set_up_objects(self):
-        # self.objects.append(self.hello_text)
         self.objects.append(self.pole)
         self.objects.append(self.button_menu)
         self.objects.append(self.button_pause)

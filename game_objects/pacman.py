@@ -25,6 +25,30 @@ class Pacman(Image):
         self.turn = Turn.UP
         self.radius = size // 2
 
+        self.tick = 10
+
+        self.pictures = [
+            "image/pacman1.png",  # 0
+            "image/pacman2.png",  # 1
+            "image/pacman3.png",  # 2
+        ]
+        self.index_pic = 0
+
+    def logic(self):
+        super().logic()
+        self.animation()
+
+    def animation(self):
+        self.tick += 1
+        if self.tick >= 15:
+            self.tick = 0
+
+            self.index_pic += 1
+            if self.index_pic > 2:
+                self.index_pic = 0
+
+            self.set_picture(self.pictures[self.index_pic])
+
     def get_real_pos(self, x, y):
         self.real_x, self.real_y = ((Settings.WIDTH - 17 * 30) // 2) + 30 * x + 15, (
                 (Settings.HEIGHT - 21 * 30) // 2) + 30 * y + 15
@@ -55,12 +79,16 @@ class PacmanLogic(BaseObject):
         x, y = self.x, self.y
         if self.turn == Turn.UP and data[y - 1][x] != '#' and data[y - 1][x] != '=' and data[y - 1][x] != '!':
             self.y -= 1
+            self.image_pacman.set_rotation(270)
         if self.turn == Turn.RIGHT and data[y][x + 1] != '#' and data[y][x + 1] != '=' and data[y][x + 1] != '!':
             self.x += 1
+            self.image_pacman.set_rotation(0)
         if self.turn == Turn.DOWN and data[y + 1][x] != '#' and data[y + 1][x] != '=' and data[y + 1][x] != '!':
             self.y += 1
+            self.image_pacman.set_rotation(90)
         if self.turn == Turn.LEFT and data[y][x - 1] != '#' and data[y][x - 1] != '=' and data[y][x - 1] != '!':
             self.x -= 1
+            self.image_pacman.set_rotation(180)
 
         if self.turn == Turn.RIGHT and data[y][x + 1] == '!':
             self.x = 1
