@@ -27,8 +27,8 @@ class GameScene(BaseScene):  # Сцена 2
         self.field_drawer = FieldDrawer(self.pole.data)
         self.seeds = SeedsLogic()
 
-        self.gameover_text = Text(Settings.WIDTH // 2 - 270, Settings.HEIGHT // 2 - 50, "GAME OVER", 100,
-                                  colors.RED)
+        self.gameover_text = Text(Settings.WIDTH // 2 - 230, Settings.HEIGHT // 2 - 50, "EASY WIN!", 100,
+                                  (10, 200, 50, 255))
         self.rec_gameover = Rect((Settings.WIDTH - 17 * 30) // 2, (Settings.HEIGHT - 21 * 30) // 2,
                                  Settings.WIDTH - (Settings.WIDTH - 17 * 30),
                                  Settings.HEIGHT - (Settings.HEIGHT - 21 * 30),
@@ -56,10 +56,8 @@ class GameScene(BaseScene):  # Сцена 2
 
         if self.rec_gameover in self.objects:
             self.objects.remove(self.rec_gameover)
-            print('удалился 1')
         if self.gameover_text in self.objects:
             self.objects.remove(self.gameover_text)
-            print('удалился 2')
         Settings.is_gameover = False
 
     def additional_process_event(self):
@@ -94,5 +92,4 @@ class GameScene(BaseScene):  # Сцена 2
     def gameover(self):
         self.objects.append(self.rec_gameover)
         self.objects.append(self.gameover_text)
-        print("конец")
         Settings.is_gameover = True
