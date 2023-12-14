@@ -1,6 +1,7 @@
 from objects.base import BaseObject
 from settings import Settings
 from game_objects.pacman import PacmanLogic
+from game_objects.ghost import GhostLogic
 
 """
 Класс Поля
@@ -15,6 +16,7 @@ class LogicPole(BaseObject):
         self.data = []  # поле
         self.tick = 0  # таймер
         self.pacman = PacmanLogic(0, 0)
+        self.ghost = GhostLogic(0, 0)
         self.read_level("levels/level1.txt")
         self.speed = 5
 
@@ -33,20 +35,26 @@ class LogicPole(BaseObject):
 
             self.tick = 0
             # TODO: Вывод поля
-            for row in self.data:
+            """for row in self.data:
                 print(*row, end='')
             print()
             print(self.pacman.x, self.pacman.y)
-            print("-*-"*30)
+            print("-*-"*30)"""
 
     def change_pole_data(self):
-        x, y = self.pacman.x, self.pacman.y
+        pac_x, pac_y = self.pacman.x, self.pacman.y
         # self.data[y][x] = ' '
-        self.data[y] = self.data[y][:x] + '.' + self.data[y][x+1:]
+        self.data[pac_y] = self.data[pac_y][:pac_x] + '.' + self.data[pac_y][pac_x+1:]
         self.pacman.move(self.data)
-        x, y = self.pacman.x, self.pacman.y
+        pac_x, pac_y = self.pacman.x, self.pacman.y
         # self.data[y][x] = '@'
-        self.data[y] = self.data[y][:x] + '@' + self.data[y][x + 1:]
+        self.data[pac_y] = self.data[pac_y][:pac_x] + '@' + self.data[pac_y][pac_x + 1:]
+
+        gho_x, gho_y = self.ghost.x, self.ghost.y
+        self.data[gho_y] = self.data[gho_y][:gho_x] + '.' + self.data[gho_y][gho_x + 1:]
+        self.ghost.move(self.data, self.pacman.x, self.pacman.y)
+        gho_x, gho_y = self.ghost.x, self.ghost.y
+        self.data[gho_y] = self.data[gho_y][:gho_x] + '1' + self.data[gho_y][gho_x + 1:]
 
     def read_level(self, path):
         fin = open(path, "r")
@@ -57,6 +65,8 @@ class LogicPole(BaseObject):
             for j in range(len(self.data[0])-1):
                 if self.data[i][j] == '@':
                     self.pacman.x, self.pacman.y = j, i
+                if self.data[i][j] == '1':
+                    self.ghost.x, self.ghost.y = j, i
 
 
 """def main():

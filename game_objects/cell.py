@@ -31,4 +31,6 @@ class Cell(Rect):
             return colors.GREEN
         if tip == 4:
             return colors.YELLOW
+        if tip == 5:
+            return colors.RED
 

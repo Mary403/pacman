@@ -17,6 +17,7 @@ class GameScene(BaseScene):  # Сцена 2
         self.pole = LogicPole()
         self.pac_logic = self.pole.pacman
         self.pac_image = self.pole.pacman.image_pacman
+        self.ghost_image = self.pole.ghost.image_ghost
         self.button_menu = ButtonMenu()
         self.button_pause = ButtonPause()
 
@@ -46,6 +47,7 @@ class GameScene(BaseScene):  # Сцена 2
         self.objects.append(self.pac_image)
         self.objects.append(self.seeds)
         self.objects.append(self.counter)
+        self.objects.append(self.ghost_image)
 
     def newgame(self):
         self.pole.newgame()

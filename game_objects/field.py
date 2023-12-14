@@ -21,5 +21,9 @@ class FieldDrawer(BaseObject):
                     Cell(j, i, 2).draw()
                 elif self.data[i][j] == '!':
                     Cell(j, i, 3).draw()
+
                 """elif self.data[i][j] == '@':
-                    Cell(j, i, 4).draw()"""  # Можно вывести пакмена как квадратик
+                    Cell(j, i, 4).draw()"""  # пакман
+
+                """elif self.data[i][j] == '1':
+                    Cell(j, i, 5).draw()"""  # призрак
