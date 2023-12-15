@@ -105,7 +105,7 @@ class GhostLogic(BaseObject):
 
         self.is_die = False
         self.tick_die = 0
-        self.time_die = 500
+        self.time_die = 300
 
         self.speed = 1
         self.weight = 100
@@ -147,13 +147,13 @@ class GhostLogic(BaseObject):
 
         if self.is_die:
             self.tick_die += 1
-            print(self.tick_die)
+            # print(self.tick_die)
             if self.tick_die >= self.time_die:
                 self.tick_die = 0
                 self.is_die = False
-                print('is die = False')
+                # print('is die = False')
                 Settings.bust = False
-                print('bust = False')
+                # print('bust = False')
                 turn = self.turn
 
                 self.speed = 1
@@ -169,9 +169,6 @@ class GhostLogic(BaseObject):
                         self.image_ghost.now_pictures = self.image_ghost.right_pictures
                 else:
                     self.image_ghost.now_pictures = self.image_ghost.bust_pictures
-
-
-
 
         if not Settings.bust:
             self.speed = 1
@@ -228,7 +225,7 @@ class GhostLogic(BaseObject):
                         turns.append(Turn.RIGHT)
 
             if len(turns) == 0:
-                print('000')
+                # print('000')
 
                 if data[y - 1][x] != '#' and data[y - 1][x] != '=' and data[y - 1][x] != '!':
                     if self.turn != Turn.DOWN:
@@ -280,7 +277,7 @@ class GhostLogic(BaseObject):
                     turns.append(Turn.RIGHT)
 
             if len(turns) == 0:
-                print('000')
+                # print('000')
 
                 if data[y - 1][x] != '#' and data[y - 1][x] != '=' and data[y - 1][x] != '!':
                     if self.turn != Turn.DOWN:
@@ -311,9 +308,9 @@ class GhostLogic(BaseObject):
                     if data[y][x + 1] != '#' and data[y][x + 1] != '=' and data[y][x + 1] != '!':
                         turns.append(Turn.RIGHT)
 
-        print('turns', *turns)
+        # print('turns', *turns)
         turn = (random.choice(turns))
-        print('turn:', turn)
+        # print('turn:', turn)
 
         self.set_turn(turn)
 
@@ -333,11 +330,11 @@ class GhostLogic(BaseObject):
         self.turn = turn
 
     def die(self, counter):
-        print('DIE')
+        # print('DIE')
         self.is_die = True
         Settings.bust = False
-        print('is die = True')
-        print('bust = False')
+        # print('is die = True')
+        # print('bust = False')
         self.image_ghost.set_pos(7, 9)
 
         counter.score_change(self.weight)
