@@ -91,6 +91,7 @@ class GameScene(BaseScene):  # Сцена 2
 
         # TODO: Событие коллизии с призраком
 
+
     def gameover(self):
         self.objects.append(self.rec_gameover)
         self.objects.append(self.gameover_text)

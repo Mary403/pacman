@@ -22,15 +22,31 @@ class Turn:
 class Ghost(Image):
     def __init__(self, x, y, size=30):
         self.real_x, self.real_y = self.get_real_pos(x, y)
-        super().__init__("image/ghost1.png", pyray.Rectangle(self.real_x, self.real_y, size, size))
+        super().__init__("image/ghost_down0.png", pyray.Rectangle(self.real_x, self.real_y, size, size))
         self.turn = Turn.UP
         self.radius = size // 2
 
         self.tick = 0
 
-        self.pictures = [
-            "image/ghost1.png",  # 0
+        self.down_pictures = [
+            "image/ghost_down0.png",  # 0
+            "image/ghost_down1.png",  # 1
         ]
+        self.up_pictures = [
+            "image/ghost_up0.png",  # 0
+            "image/ghost_up1.png",  # 1
+        ]
+        self.left_pictures = [
+            "image/ghost_left0.png",  # 0
+            "image/ghost_left1.png",  # 1
+        ]
+        self.right_pictures = [
+            "image/ghost_right0.png",  # 0
+            "image/ghost_right1.png",  # 1
+        ]
+
+        self.now_pictures = self.down_pictures
+
         self.index_pic = 0
 
         self.start_x = x
@@ -42,7 +58,7 @@ class Ghost(Image):
 
     def logic(self):
         super().logic()
-        # self.animation()
+        self.animation()
 
     def animation(self):
         self.tick += 1
@@ -50,10 +66,10 @@ class Ghost(Image):
             self.tick = 0
 
             self.index_pic += 1
-            if self.index_pic > len(self.pictures) - 1:
+            if self.index_pic > len(self.now_pictures) - 1:
                 self.index_pic = 0
 
-            self.set_picture(self.pictures[self.index_pic])
+            self.set_picture(self.now_pictures[self.index_pic])
 
     def get_real_pos(self, x, y):
         self.real_x, self.real_y = ((Settings.WIDTH - 17 * 30) // 2) + 30 * x + 15, (
@@ -200,3 +216,12 @@ class GhostLogic(BaseObject):
 
     def set_turn(self, turn):
         self.turn = turn
+        if turn == Turn.UP:
+            self.image_ghost.now_pictures = self.image_ghost.up_pictures
+        elif turn == Turn.DOWN:
+            self.image_ghost.now_pictures = self.image_ghost.down_pictures
+        elif turn == Turn.LEFT:
+            self.image_ghost.now_pictures = self.image_ghost.left_pictures
+        elif turn == Turn.RIGHT:
+            self.image_ghost.now_pictures = self.image_ghost.right_pictures
+
