@@ -86,7 +86,10 @@ class PacmanLogic(BaseObject):
         self.start_x = x
         self.start_y = y
 
+        self.data = None
+
     def move(self, data):
+        self.data = data
         x, y = self.x, self.y
         if self.turn == Turn.UP and data[y - 1][x] != '#' and data[y - 1][x] != '=' and data[y - 1][x] != '!':
             self.y -= 1
@@ -122,7 +125,11 @@ class PacmanLogic(BaseObject):
         super().draw()
 
     def event(self):
+        data = self.data
+        x, y = self.x, self.y
+
         self.image_pacman.event()
+
         keys = {
             pyray.KeyboardKey.KEY_W: Turn.UP,
             pyray.KeyboardKey.KEY_A: Turn.LEFT,
@@ -131,4 +138,11 @@ class PacmanLogic(BaseObject):
         }
         for key in keys:
             if pyray.is_key_pressed(key):
-                self.turn = keys[key]
+                if keys[key] == Turn.UP and data[y - 1][x] != '#' and data[y - 1][x] != '=':
+                    self.turn = keys[key]
+                if keys[key] == Turn.RIGHT and data[y][x + 1] != '#' and data[y][x + 1] != '=':
+                    self.turn = keys[key]
+                if keys[key] == Turn.DOWN and data[y + 1][x] != '#' and data[y + 1][x] != '=':
+                    self.turn = keys[key]
+                if keys[key] == Turn.LEFT and data[y][x - 1] != '#' and data[y][x - 1] != '=':
+                    self.turn = keys[key]
