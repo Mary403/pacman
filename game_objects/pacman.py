@@ -36,13 +36,16 @@ class Pacman(Image):
         self.start_x = x
         self.start_y = y
 
+        self.play_anim = True
+
     def newgame(self):
         self.turn = Turn.UP
         self.set_pos(self.start_x, self.start_y)
 
     def logic(self):
         super().logic()
-        self.animation()
+        if self.play_anim:
+            self.animation()
 
     def animation(self):
         self.tick += 1
