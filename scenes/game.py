@@ -10,6 +10,7 @@ from objects.text import Text
 from objects.button_menu import ButtonMenu
 from objects.button_pause import ButtonPause
 from game_objects.counter import Counter
+from game_objects.bust import Bust
 
 
 class GameScene(BaseScene):  # Сцена 2
@@ -17,6 +18,7 @@ class GameScene(BaseScene):  # Сцена 2
         self.pole = LogicPole()
         self.pac_logic = self.pole.pacman
         self.pac_image = self.pole.pacman.image_pacman
+        self.ghost_logic = self.pole.ghost
         self.ghost_image = self.pole.ghost.image_ghost
         self.button_menu = ButtonMenu()
         self.button_pause = ButtonPause()
@@ -40,6 +42,10 @@ class GameScene(BaseScene):  # Сцена 2
 
         self.counter = Counter(300, 30)
 
+        self.tick_bust = 0
+
+        self.bust = Bust()
+
         super().__init__()
 
     def set_up_objects(self):
@@ -50,7 +56,9 @@ class GameScene(BaseScene):  # Сцена 2
         self.objects.append(self.pac_image)
         self.objects.append(self.seeds)
         self.objects.append(self.counter)
-        self.objects.append(self.ghost_image)
+        #self.objects.append(self.ghost_image)
+        self.objects.append(self.bust)
+        self.objects.append(self.ghost_logic)
 
     def newgame(self):
         self.pole.newgame()
@@ -58,6 +66,8 @@ class GameScene(BaseScene):  # Сцена 2
         self.pac_logic.newgame()
         self.counter.newgame()
         self.seeds.newgame()
+        self.ghost_logic.newgame()
+        self.ghost_image.newgame()
 
         self.pac_image.play_anim = True
 
@@ -99,12 +109,15 @@ class GameScene(BaseScene):  # Сцена 2
         # TODO: Событие коллизии с призраком
         c1 = self.ghost_image.get_center()
         c2 = self.pac_image.get_center()
-        r1 = self.ghost_image.get_radius() - 10
-        r2 = self.pac_image.get_radius() - 10
+        r1 = self.ghost_image.get_radius() - 1
+        r2 = self.pac_image.get_radius() - 1
 
         if pyray.check_collision_circles(c1, r1, c2, r2):
             if not Settings.is_gameover:
-                self.gameover('lose')
+                if not Settings.bust:
+                    self.gameover('lose')
+                if Settings.bust:
+                    self.ghost_logic.die(self.counter)
 
     def gameover(self, status):
         Settings.is_gameover = True

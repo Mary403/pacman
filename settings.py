@@ -15,6 +15,8 @@ class Settings:
 
     newgame = False
 
+    bust = False
+
     @staticmethod
     def set_scene(index):
         Settings.scene_changed = True

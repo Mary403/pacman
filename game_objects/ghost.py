@@ -44,6 +44,10 @@ class Ghost(Image):
             "image/ghost_right0.png",  # 0
             "image/ghost_right1.png",  # 1
         ]
+        self.bust_pictures = [
+            "image/ghost_bust0.png",  # 0
+            "image/ghost_bust1.png",  # 1
+        ]
 
         self.now_pictures = self.down_pictures
 
@@ -99,6 +103,13 @@ class GhostLogic(BaseObject):
         self.start_x = x
         self.start_y = y
 
+        self.is_die = False
+        self.tick_die = 0
+        self.time_die = 500
+
+        self.speed = 1
+        self.weight = 100
+
     def move(self, data, pac_x, pac_y):
         self.new_turn(data, pac_x, pac_y)
         x, y = self.x, self.y
@@ -124,89 +135,181 @@ class GhostLogic(BaseObject):
 
     def newgame(self):
         self.turn = Turn.DOWN
+        self.speed = 1
+        self.is_die = False
+        self.tick_die = 0
         """self.x = self.start_x
         self.y = self.start_y"""
 
     def logic(self):
-        self.image_ghost.logic()
-        super().logic()
+        if Settings.bust:
+            self.speed = 0.25
+
+        if self.is_die:
+            self.tick_die += 1
+            print(self.tick_die)
+            if self.tick_die >= self.time_die:
+                self.tick_die = 0
+                self.is_die = False
+                print('is die = False')
+                Settings.bust = False
+                print('bust = False')
+                turn = self.turn
+
+                self.speed = 1
+
+                if not Settings.bust:
+                    if turn == Turn.UP:
+                        self.image_ghost.now_pictures = self.image_ghost.up_pictures
+                    elif turn == Turn.DOWN:
+                        self.image_ghost.now_pictures = self.image_ghost.down_pictures
+                    elif turn == Turn.LEFT:
+                        self.image_ghost.now_pictures = self.image_ghost.left_pictures
+                    elif turn == Turn.RIGHT:
+                        self.image_ghost.now_pictures = self.image_ghost.right_pictures
+                else:
+                    self.image_ghost.now_pictures = self.image_ghost.bust_pictures
+
+
+
+
+        if not Settings.bust:
+            self.speed = 1
+
+        if not self.is_die:
+            self.image_ghost.logic()
+            super().logic()
 
     def draw(self):
-        self.image_ghost.draw()
-        super().draw()
+        turn = self.turn
+        if not Settings.bust:
+            if turn == Turn.UP:
+                self.image_ghost.now_pictures = self.image_ghost.up_pictures
+            elif turn == Turn.DOWN:
+                self.image_ghost.now_pictures = self.image_ghost.down_pictures
+            elif turn == Turn.LEFT:
+                self.image_ghost.now_pictures = self.image_ghost.left_pictures
+            elif turn == Turn.RIGHT:
+                self.image_ghost.now_pictures = self.image_ghost.right_pictures
+        else:
+            self.image_ghost.now_pictures = self.image_ghost.bust_pictures
+
+        if not self.is_die:
+            self.image_ghost.draw()
+            super().draw()
 
     def event(self):
-        self.image_ghost.event()
-
-    def closer_to_pacman(self, x, y, pac_x, pac_y):
-        dx_now, dy_now = self.x - pac_x, self.y - pac_y
-        if dx_now < 0: dx_now *= -1
-        if dy_now < 0: dy_now *= -1
-
-        dx, dy = x - pac_x, y - pac_y
-        if dx < 0: dx *= -1
-        if dy < 0: dy *= -1
-
-        if dx < dx_now or dy < dy_now:
-            return True
-        else:
-            return False
+        if not self.is_die:
+            self.image_ghost.event()
 
     def new_turn(self, data, pac_x, pac_y):
         x, y = self.x, self.y
         turns = []
 
-        if data[y - 1][x] != '#' and data[y - 1][x] != '=' and data[y - 1][x] != '!':
-            if y > pac_y:
-                if self.turn != Turn.DOWN:
-                    turns.append(Turn.UP)
-
-        if data[y + 1][x] != '#' and data[y + 1][x] != '=' and data[y + 1][x] != '!':
-            if y < pac_y:
-                if self.turn != Turn.UP:
-                    turns.append(Turn.DOWN)
-
-        if data[y][x - 1] != '#' and data[y][x - 1] != '=' and data[y][x - 1] != '!':
-            if x > pac_x:
-                if self.turn != Turn.RIGHT:
-                    turns.append(Turn.LEFT)
-
-        if data[y][x + 1] != '#' and data[y][x + 1] != '=' and data[y][x + 1] != '!':
-            if x < pac_x:
-                if self.turn != Turn.LEFT:
-                    turns.append(Turn.RIGHT)
-
-        if len(turns) == 0:
-            print('000')
-
+        if not Settings.bust:
             if data[y - 1][x] != '#' and data[y - 1][x] != '=' and data[y - 1][x] != '!':
-                if self.turn != Turn.DOWN:
+                if y > pac_y:
+                    if self.turn != Turn.DOWN:
+                        turns.append(Turn.UP)
+
+            if data[y + 1][x] != '#' and data[y + 1][x] != '=' and data[y + 1][x] != '!':
+                if y < pac_y:
+                    if self.turn != Turn.UP:
+                        turns.append(Turn.DOWN)
+
+            if data[y][x - 1] != '#' and data[y][x - 1] != '=' and data[y][x - 1] != '!':
+                if x > pac_x:
+                    if self.turn != Turn.RIGHT:
+                        turns.append(Turn.LEFT)
+
+            if data[y][x + 1] != '#' and data[y][x + 1] != '=' and data[y][x + 1] != '!':
+                if x < pac_x:
+                    if self.turn != Turn.LEFT:
+                        turns.append(Turn.RIGHT)
+
+            if len(turns) == 0:
+                print('000')
+
+                if data[y - 1][x] != '#' and data[y - 1][x] != '=' and data[y - 1][x] != '!':
+                    if self.turn != Turn.DOWN:
+                        turns.append(Turn.UP)
+
+                if data[y + 1][x] != '#' and data[y + 1][x] != '=' and data[y + 1][x] != '!':
+                    if self.turn != Turn.UP:
+                        turns.append(Turn.DOWN)
+
+                if data[y][x - 1] != '#' and data[y][x - 1] != '=' and data[y][x - 1] != '!':
+                    if self.turn != Turn.RIGHT:
+                        turns.append(Turn.LEFT)
+
+                if data[y][x + 1] != '#' and data[y][x + 1] != '=' and data[y][x + 1] != '!':
+                    if self.turn != Turn.LEFT:
+                        turns.append(Turn.RIGHT)
+
+                if len(turns) == 0:
+                    if data[y - 1][x] != '#' and data[y - 1][x] != '=' and data[y - 1][x] != '!':
+                        turns.append(Turn.UP)
+
+                    if data[y + 1][x] != '#' and data[y + 1][x] != '=' and data[y + 1][x] != '!':
+                        turns.append(Turn.DOWN)
+
+                    if data[y][x - 1] != '#' and data[y][x - 1] != '=' and data[y][x - 1] != '!':
+                        turns.append(Turn.LEFT)
+
+                    if data[y][x + 1] != '#' and data[y][x + 1] != '=' and data[y][x + 1] != '!':
+                        turns.append(Turn.RIGHT)
+        else:
+            if data[y - 1][x] != '#' and data[y - 1][x] != '=' and data[y - 1][x] != '!':
+                if y < pac_y:
+                    # if self.turn != Turn.DOWN:
                     turns.append(Turn.UP)
 
             if data[y + 1][x] != '#' and data[y + 1][x] != '=' and data[y + 1][x] != '!':
-                if self.turn != Turn.UP:
+                if y > pac_y:
+                    # if self.turn != Turn.UP:
                     turns.append(Turn.DOWN)
 
             if data[y][x - 1] != '#' and data[y][x - 1] != '=' and data[y][x - 1] != '!':
-                if self.turn != Turn.RIGHT:
+                if x < pac_x:
+                    # if self.turn != Turn.RIGHT:
                     turns.append(Turn.LEFT)
 
             if data[y][x + 1] != '#' and data[y][x + 1] != '=' and data[y][x + 1] != '!':
-                if self.turn != Turn.LEFT:
+                if x > pac_x:
+                    # if self.turn != Turn.LEFT:
                     turns.append(Turn.RIGHT)
 
             if len(turns) == 0:
+                print('000')
+
                 if data[y - 1][x] != '#' and data[y - 1][x] != '=' and data[y - 1][x] != '!':
-                    turns.append(Turn.UP)
+                    if self.turn != Turn.DOWN:
+                        turns.append(Turn.UP)
 
                 if data[y + 1][x] != '#' and data[y + 1][x] != '=' and data[y + 1][x] != '!':
-                    turns.append(Turn.DOWN)
+                    if self.turn != Turn.UP:
+                        turns.append(Turn.DOWN)
 
                 if data[y][x - 1] != '#' and data[y][x - 1] != '=' and data[y][x - 1] != '!':
-                    turns.append(Turn.LEFT)
+                    if self.turn != Turn.RIGHT:
+                        turns.append(Turn.LEFT)
 
                 if data[y][x + 1] != '#' and data[y][x + 1] != '=' and data[y][x + 1] != '!':
-                    turns.append(Turn.RIGHT)
+                    if self.turn != Turn.LEFT:
+                        turns.append(Turn.RIGHT)
+
+                if len(turns) == 0:
+                    if data[y - 1][x] != '#' and data[y - 1][x] != '=' and data[y - 1][x] != '!':
+                        turns.append(Turn.UP)
+
+                    if data[y + 1][x] != '#' and data[y + 1][x] != '=' and data[y + 1][x] != '!':
+                        turns.append(Turn.DOWN)
+
+                    if data[y][x - 1] != '#' and data[y][x - 1] != '=' and data[y][x - 1] != '!':
+                        turns.append(Turn.LEFT)
+
+                    if data[y][x + 1] != '#' and data[y][x + 1] != '=' and data[y][x + 1] != '!':
+                        turns.append(Turn.RIGHT)
 
         print('turns', *turns)
         turn = (random.choice(turns))
@@ -215,13 +318,26 @@ class GhostLogic(BaseObject):
         self.set_turn(turn)
 
     def set_turn(self, turn):
-        self.turn = turn
-        if turn == Turn.UP:
-            self.image_ghost.now_pictures = self.image_ghost.up_pictures
-        elif turn == Turn.DOWN:
-            self.image_ghost.now_pictures = self.image_ghost.down_pictures
-        elif turn == Turn.LEFT:
-            self.image_ghost.now_pictures = self.image_ghost.left_pictures
-        elif turn == Turn.RIGHT:
-            self.image_ghost.now_pictures = self.image_ghost.right_pictures
+        if not Settings.bust:
+            if turn == Turn.UP:
+                self.image_ghost.now_pictures = self.image_ghost.up_pictures
+            elif turn == Turn.DOWN:
+                self.image_ghost.now_pictures = self.image_ghost.down_pictures
+            elif turn == Turn.LEFT:
+                self.image_ghost.now_pictures = self.image_ghost.left_pictures
+            elif turn == Turn.RIGHT:
+                self.image_ghost.now_pictures = self.image_ghost.right_pictures
+        else:
+            self.image_ghost.now_pictures = self.image_ghost.bust_pictures
 
+        self.turn = turn
+
+    def die(self, counter):
+        print('DIE')
+        self.is_die = True
+        Settings.bust = False
+        print('is die = True')
+        print('bust = False')
+        self.image_ghost.set_pos(7, 9)
+
+        counter.score_change(self.weight)

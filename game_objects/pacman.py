@@ -79,14 +79,15 @@ class Pacman(Image):
 
 
 class PacmanLogic(BaseObject):
-    def __init__(self, x, y):
+    def __init__(self, x, y, data):
         super().__init__(x, y)
+        self.data = data
         self.turn = Turn.UP
         self.image_pacman = Pacman(8, 15)
         self.start_x = x
         self.start_y = y
 
-        self.data = None
+        self.speed = 1
 
     def move(self, data):
         self.data = data

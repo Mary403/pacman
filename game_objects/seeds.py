@@ -33,7 +33,9 @@ class Energizer(Ellipse):
 
     def eaten(self, counter):
         # TODO: Включается режим bust
+        Settings.bust = True
         counter.score_change(self.weight)
+        return True
 
 
 class Seed(Ellipse):
@@ -61,6 +63,7 @@ class Seed(Ellipse):
 
     def eaten(self, counter):
         counter.score_change(self.weight)
+        return False
 
 
 class SeedsLogic(BaseObject):
